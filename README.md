@@ -51,9 +51,8 @@ channels.
 - Are failed transactions concentrated in blocked accounts?
 
 ## Example SQL Queries
-
-### Total Spending per Customer (Posted Debits)
 ```sql
+### Total Spending per Customer (Posted Debits)
 SELECT
   c.full_name,
   SUM(t.amount) AS total_spent
