@@ -65,3 +65,34 @@ WHERE t.txn_type = 'debit'
 GROUP BY c.full_name
 ORDER BY total_spent DESC;
 
+Monthly Spending Trend
+SELECT
+  DATE_TRUNC('month', txn_ts) AS month,
+  SUM(amount) AS total_spent
+FROM transactions
+WHERE txn_type = 'debit'
+  AND status = 'posted'
+GROUP BY month
+ORDER BY month;
+
+Average Transaction Value by Channel
+SELECT
+  channel,
+  ROUND(AVG(amount), 2) AS avg_transaction_value
+FROM transactions
+WHERE status = 'posted'
+GROUP BY channel
+ORDER BY avg_transaction_value DESC;
+
+Failed or Reversed Transactions by Account (with Customer Context)
+SELECT
+  c.full_name,
+  a.account_id,
+  a.status AS account_status,
+  COUNT(*) AS failed_transactions
+FROM transactions t
+JOIN accounts a ON a.account_id = t.account_id
+JOIN customers c ON c.customer_id = a.customer_id
+WHERE t.status IN ('failed','reversed')
+GROUP BY c.full_name, a.account_id, a.status
+ORDER BY failed_transactions DESC;
