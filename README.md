@@ -64,3 +64,4 @@ WHERE t.txn_type = 'debit'
   AND t.status = 'posted'
 GROUP BY c.full_name
 ORDER BY total_spent DESC;
+
