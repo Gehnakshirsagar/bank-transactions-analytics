@@ -54,3 +54,8 @@ VALUES
 -- Liam (blocked account)
 (5, '2024-01-20 22:15', 'debit', 250.00, 'online', 'failed', 4, 'Late night ride', 1200.00);
 
+SELECT COUNT(*) FROM customers;
+SELECT COUNT(*) FROM accounts;
+SELECT COUNT(*) FROM transactions;
+
+
